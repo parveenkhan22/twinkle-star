@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<script type="text/javascript" src="paperjs-v0.12.11\dist\paper-full.js"></script>
+
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/howler/2.2.0/howler.js"></script>
+
+	<link rel="stylesheet" type="text/css" href="app.css">
+<script type="text/javascript" src="app.js"></script>
+	<script type="text/paperscript" canvas="mycanvas" >
+
+		var sound1=new Howl({
+		src:['sounds/sounds/moon.mp3']
+	})
+
+		var sound2=new Howl({
+		src:['sounds/sounds/twinkle.mp3']
+	})
+
+		var stars=[];
+
+		function onKeyDown(event){
+		sound2.play();
+		var maxPoint= new Point(view.size.width, view.size.height);
+		var randomPoint=Point.random();
+		var point=maxPoint*randomPoint;
+
+ 	var star = new Path.Star({
+    center: point,
+    points: 6,
+    radius1: 85,
+    radius2: 35,
+    fillColor: 'yellow'
+});
+if(event.key==="a"){
+	sound1.play();
+	star.fillColor="purple";
+}
+stars.push(star);
+}
+
+function onFrame(event){
+	for(var i=0; i<stars.length; i++){
+	stars[i].fillColor.hue+=1;
+	stars[i].rotate(3);
+	stars[i].scale(.99);
+
+}
+}
+
+	</script>
+	
+</head>
+<body>
+<canvas id="mycanvas" resize></canvas>
+</body>
+</html>

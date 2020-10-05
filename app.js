@@ -1,0 +1,1 @@
+alert('press any key to twinkle the stars');
